@@ -10,23 +10,22 @@ const RefreshToken = require("../Models/RefreshToken");
 
 module.exports = async (req, res) => {
   const { email, password } = req.body;
-  console.log(email, password);
 
   if (!email || !email.length || !password || !password.length) res.status(400);
-  console.log(email, password);
+
   try {
     const result = await User.findOne({ email: email });
     if (!result) {
       res.sendStatus(400);
       return;
     }
-    console.log("TestA");
+
     const passwordMatch = await bcrypt.compare(password, result.password);
     if (!passwordMatch) {
       res.sendStatus(400);
       return;
     }
-    console.log("TestB");
+
     // Generate access token - JWT
     const accessToken = jwt.sign({ idUser: result._id }, privateKey, {
       expiresIn: 5 * 60,
@@ -38,14 +37,14 @@ module.exports = async (req, res) => {
 
     // Save refresh token in database with the jwt linked
     let date = new Date();
-    date.setMinutes(date.getMinutes() + 15);
+    date.setMinutes(date.getMinutes() + 60);
     await RefreshToken.create({
       tokenValue: refreshToken,
       linkedJWT: accessToken,
       idUser: result._id,
       expirationDate: date,
     });
-    console.log("TestC");
+
     // Send back both tokens to the client and save in coolies with httpOnly flag
     res.setHeader("Set-Cookie", [
       cookie.serialize("accessToken", String(accessToken), {

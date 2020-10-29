@@ -8,10 +8,9 @@ const RefreshToken = require("../Models/RefreshToken");
 const BlackList = require("../Models/BlackList");
 
 module.exports = async (req, res) => {
-  console.log("refresh request executed");
-
   // check for the refresh token in the cookies of the request (if not send back 401)
   const cookies = cookie.parse(req.headers.cookie || "");
+  console.log(cookies);
   if (!cookies.refreshToken) {
     res.sendStatus(401);
     return;
@@ -48,7 +47,7 @@ module.exports = async (req, res) => {
     const newRefreshToken = uuid4();
 
     let date = new Date();
-    date.setMinutes(date.getMinutes() + 1);
+    date.setMinutes(date.getMinutes() + 200);
     await RefreshToken.findOneAndUpdate(
       { tokenValue: cookies.refreshToken },
       {

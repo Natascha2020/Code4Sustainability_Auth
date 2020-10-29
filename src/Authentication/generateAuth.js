@@ -37,7 +37,7 @@ module.exports = async (req, res) => {
 
     // Save refresh token in database with the jwt linked
     let date = new Date();
-    date.setMinutes(date.getMinutes() + 60);
+    date.setMinutes(date.getMinutes() + 120);
     await RefreshToken.create({
       tokenValue: refreshToken,
       linkedJWT: accessToken,
@@ -56,7 +56,6 @@ module.exports = async (req, res) => {
     ]);
     res.send(accessToken);
   } catch (err) {
-    console.log("TestD");
     console.log(err);
     res.sendStatus(400);
   }

@@ -9,7 +9,7 @@ const generateAuth = require("./Authentication/generateAuth");
 const refreshAuth = require("./Authentication/refreshAuth");
 const verifyBlackList = require("./Authentication/verifyBlackList");
 const checkValidity = require("./Authentication/checkValidity");
-
+const deleteAuth = require("./Authentication/deleteAuth");
 const app = express();
 const port = process.env.PORT || 5001;
 
@@ -34,5 +34,6 @@ app.post("/generateAuth", generateAuth);
 app.get("/refreshAuth", refreshAuth);
 app.get("/verifyBlackList", verifyBlackList);
 app.get("/checkValidity", checkValidity, refreshAuth);
+app.get("/deleteAuth", deleteAuth);
 
 app.listen(port, () => console.log("Authentication server is running on port " + port));

@@ -10,7 +10,6 @@ const BlackList = require("../Models/BlackList");
 module.exports = async (req, res) => {
   // check for the refresh token in the cookies of the request (if not send back 401)
   const cookies = cookie.parse(req.headers.cookie || "");
-  console.log(cookies);
   if (!cookies.refreshToken) {
     res.sendStatus(401);
     return;
@@ -28,9 +27,8 @@ module.exports = async (req, res) => {
 
   // check if the accessToken linked to the refreshToken in database is still valid (if send back 401 and delete refreshToken and put accessToken on blacklist)
   try {
-    const decryptedLinkedJWT = jwt.verify(result.linkedJWT, privateKey, {
-      algorithm: "RS256",
-    });
+    const decryptedLinkedJWT = jwt.verify(result.linkedJWT, privateKey);
+
     if (decryptedLinkedJWT) {
       await RefreshToken.remove({ _id: result._id });
       await BlackList.create({ tokenValue: result.linkedJWT });
@@ -38,14 +36,11 @@ module.exports = async (req, res) => {
       return;
     }
   } catch (error) {
-    // if exists, generate a new accessToken and refreshToken resave them in database
+    // // if exists, generate a new accessToken and refreshToken resave them in database
     const newAccessToken = jwt.sign({ idUser: result.idUser }, privateKey, {
-      expiresIn: 60 * 5,
-      algorithm: "RS256",
+      expiresIn: 5 * 60,
     });
-
     const newRefreshToken = uuid4();
-
     let date = new Date();
     date.setMinutes(date.getMinutes() + 200);
     await RefreshToken.findOneAndUpdate(
@@ -57,7 +52,6 @@ module.exports = async (req, res) => {
         expirationDate: date,
       }
     );
-
     // Send back both new tokens to the client
     res.setHeader("Set-Cookie", [
       cookie.serialize("accessToken", String(newAccessToken), {
@@ -67,6 +61,6 @@ module.exports = async (req, res) => {
         httpOnly: true,
       }),
     ]);
-    res.sendStatus(200);
+    res.json({ idUser: result.idUser });
   }
 };

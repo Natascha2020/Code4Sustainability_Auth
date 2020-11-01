@@ -12,9 +12,9 @@ module.exports = async (req, res) => {
   const { email, password } = req.body;
 
   if (!email || !email.length || !password || !password.length) res.status(400);
-
   try {
     const result = await User.findOne({ email: email });
+
     if (!result) {
       res.sendStatus(400);
       return;
@@ -29,7 +29,6 @@ module.exports = async (req, res) => {
     // Generate access token - JWT
     const accessToken = jwt.sign({ idUser: result._id }, privateKey, {
       expiresIn: 5 * 60,
-      algorithm: "RS256",
     });
 
     // Generate refresh token - UUID4

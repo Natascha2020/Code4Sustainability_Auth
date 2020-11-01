@@ -21,19 +21,21 @@ module.exports = async (req, res, next) => {
     });
     if (foundToken) {
       res.sendStatus(401);
+
       return;
     }
 
-    const payload = jwt.verify(cookies.accessToken, privateKey, { algorithms: "RS256" });
+    const payload = jwt.verify(cookies.accessToken, privateKey);
     // if valid go next
     if (payload) {
       req.user = payload.idUser;
-      res.json({ valid: true });
+      let idUser = payload.idUser;
+      res.json({ valid: true, idUser: idUser });
       return;
     }
   } catch (err) {
-    console.log(err);
     //check if the refresh token is still valid
+    console.log("in checkvaliditz catch", err);
     next();
   }
 };

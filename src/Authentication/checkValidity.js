@@ -3,7 +3,6 @@ const jwt = require("jsonwebtoken");
 const fs = require("fs");
 
 const privateKey = fs.readFileSync("private.key");
-const RefreshToken = require("../Models/RefreshToken");
 const BlackList = require("../Models/BlackList");
 
 module.exports = async (req, res, next) => {
@@ -25,7 +24,7 @@ module.exports = async (req, res, next) => {
       return;
     }
 
-    const payload = jwt.verify(cookies.accessToken, privateKey);
+    const payload = jwt.verify(cookies.accessToken, privateKey, { algorithm: "RS256" });
     // if valid go next
     if (payload) {
       req.user = payload.idUser;
@@ -34,8 +33,7 @@ module.exports = async (req, res, next) => {
       return;
     }
   } catch (err) {
-    //check if the refresh token is still valid
-    console.log("in checkvaliditz catch", err);
+    console.log(err);
     next();
   }
 };

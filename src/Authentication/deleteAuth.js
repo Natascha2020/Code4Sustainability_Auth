@@ -26,7 +26,7 @@ module.exports = async (req, res) => {
 
     // check if the accessToken linked to the refreshToken in database is still valid (if send back 401 and delete refreshToken and put accessToken on blacklist)
 
-    const decryptedLinkedJWT = jwt.verify(result.linkedJWT, privateKey);
+    const decryptedLinkedJWT = jwt.verify(result.linkedJWT, privateKey, { algorithm: "RS256" });
 
     if (decryptedLinkedJWT) {
       await RefreshToken.deleteOne({ _id: result._id });

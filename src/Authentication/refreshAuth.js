@@ -27,7 +27,7 @@ module.exports = async (req, res) => {
 
   // check if the accessToken linked to the refreshToken in database is still valid (if send back 401 and delete refreshToken and put accessToken on blacklist)
   try {
-    const decryptedLinkedJWT = jwt.verify(result.linkedJWT, privateKey);
+    const decryptedLinkedJWT = jwt.verify(result.linkedJWT, privateKey, { algorithm: "RS256" });
 
     if (decryptedLinkedJWT) {
       await RefreshToken.remove({ _id: result._id });
@@ -39,6 +39,7 @@ module.exports = async (req, res) => {
     // // if exists, generate a new accessToken and refreshToken resave them in database
     const newAccessToken = jwt.sign({ idUser: result.idUser }, privateKey, {
       expiresIn: 5 * 60,
+      algorithm: "RS256",
     });
     const newRefreshToken = uuid4();
     let date = new Date();

@@ -2,7 +2,7 @@ const cookie = require("cookie");
 const jwt = require("jsonwebtoken");
 const uuid4 = require("uuid4");
 const fs = require("fs");
-const privateKey = fs.readFileSync("private.key");
+const privateKey = fs.readFileSync("private.pem");
 
 const RefreshToken = require("../Models/RefreshToken");
 const BlackList = require("../Models/BlackList");
@@ -27,19 +27,18 @@ module.exports = async (req, res) => {
 
   // check if the accessToken linked to the refreshToken in database is still valid (if send back 401 and delete refreshToken and put accessToken on blacklist)
   try {
-    const decryptedLinkedJWT = jwt.verify(result.linkedJWT, privateKey, { algorithm: "RS256" });
+    const decryptedLinkedJWT = jwt.verify(result.linkedJWT, "cat");
 
     if (decryptedLinkedJWT) {
-      await RefreshToken.remove({ _id: result._id });
-      await BlackList.create({ tokenValue: result.linkedJWT });
+      // await RefreshToken.remove({ _id: result._id });
+      // await BlackList.create({ tokenValue: result.linkedJWT });
       res.sendStatus(401);
       return;
     }
   } catch (error) {
     // // if exists, generate a new accessToken and refreshToken resave them in database
-    const newAccessToken = jwt.sign({ idUser: result.idUser }, privateKey, {
-      expiresIn: 5 * 60,
-      algorithm: "RS256",
+    const newAccessToken = jwt.sign({ idUser: result.idUser }, "cat", {
+      expiresIn: 5,
     });
     const newRefreshToken = uuid4();
     let date = new Date();

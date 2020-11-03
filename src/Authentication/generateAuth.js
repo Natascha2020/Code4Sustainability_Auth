@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const uuid4 = require("uuid4");
 const cookie = require("cookie");
 const fs = require("fs");
-const privateKey = fs.readFileSync("private.key");
+const privateKey = fs.readFileSync("private.pem", "utf-8");
 
 const User = require("../Models/User");
 const RefreshToken = require("../Models/RefreshToken");
@@ -27,9 +27,8 @@ module.exports = async (req, res) => {
     }
 
     // Generate access token - JWT
-    const accessToken = jwt.sign({ idUser: result._id }, privateKey, {
-      expiresIn: 5 * 60,
-      algorithm: "RS256",
+    const accessToken = jwt.sign({ idUser: result._id }, "cat", {
+      expiresIn: 5,
     });
 
     // Generate refresh token - UUID4

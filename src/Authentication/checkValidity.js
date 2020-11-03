@@ -2,7 +2,7 @@ const cookie = require("cookie");
 const jwt = require("jsonwebtoken");
 const fs = require("fs");
 
-const privateKey = fs.readFileSync("private.key");
+const privateKey = fs.readFileSync("private.pem", "utf-8");
 const BlackList = require("../Models/BlackList");
 
 module.exports = async (req, res, next) => {
@@ -24,7 +24,7 @@ module.exports = async (req, res, next) => {
       return;
     }
 
-    const payload = jwt.verify(cookies.accessToken, privateKey, { algorithm: "RS256" });
+    const payload = jwt.verify(cookies.accessToken, "cat");
     // if valid go next
     if (payload) {
       req.user = payload.idUser;
@@ -33,7 +33,7 @@ module.exports = async (req, res, next) => {
       return;
     }
   } catch (err) {
-    console.log(err);
+    console.log("checkValidity", err);
     next();
   }
 };

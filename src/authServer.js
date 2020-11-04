@@ -7,7 +7,7 @@ const bodyParser = require("body-parser");
 
 const generateAuth = require("./Authentication/generateAuth");
 const refreshAuth = require("./Authentication/refreshAuth");
-const verifyBlackList = require("./Authentication/verifyBlackList");
+// const verifyBlackList = require("./Authentication/verifyBlackList");
 const checkValidity = require("./Authentication/checkValidity");
 const deleteAuth = require("./Authentication/deleteAuth");
 const app = express();
@@ -33,7 +33,7 @@ app.use(bodyParser.json());
 app.post("/generateAuth", generateAuth);
 
 app.get("/refreshAuth", refreshAuth);
-app.get("/verifyBlackList", verifyBlackList);
+// app.get("/verifyBlackList", verifyBlackList);
 app.get("/checkValidity", checkValidity, refreshAuth);
 app.get("/deleteAuth", deleteAuth);
 

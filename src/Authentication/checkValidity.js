@@ -15,9 +15,9 @@ module.exports = async (req, res, next) => {
   }
 
   try {
-    const foundToken = await BlackList.findOne({
-      tokenValue: cookies.accessToken,
-    });
+    // const foundToken = await BlackList.findOne({
+    //   tokenValue: cookies.accessToken,
+    // });
     if (foundToken) {
       res.sendStatus(401);
 

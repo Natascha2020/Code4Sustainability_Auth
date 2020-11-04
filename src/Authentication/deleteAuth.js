@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const fs = require("fs");
 const privateKey = fs.readFileSync("private.pem");
 const RefreshToken = require("../Models/RefreshToken");
-// const BlackList = require("../Models/BlackList");
+const BlackList = require("../Models/BlackList");
 
 module.exports = async (req, res) => {
   // check if access token is send in cookies with request
@@ -30,7 +30,7 @@ module.exports = async (req, res) => {
 
     if (decryptedLinkedJWT) {
       await RefreshToken.deleteOne({ _id: result._id });
-      // await BlackList.create({ tokenValue: result.linkedJWT });
+      await BlackList.create({ tokenValue: result.linkedJWT });
       res.setHeader("Set-Cookie", [
         cookie.serialize("accessToken", "", {
           httpOnly: true,

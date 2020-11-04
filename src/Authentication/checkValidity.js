@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const fs = require("fs");
 
 const privateKey = fs.readFileSync("private.pem", "utf-8");
-// const BlackList = require("../Models/BlackList");
+const BlackList = require("../Models/BlackList");
 
 module.exports = async (req, res, next) => {
   // check for the refresh token in the cookies of the request (if not send back 401)
@@ -15,9 +15,9 @@ module.exports = async (req, res, next) => {
   }
 
   try {
-    // const foundToken = await BlackList.findOne({
-    //   tokenValue: cookies.accessToken,
-    // });
+    const foundToken = await BlackList.findOne({
+      tokenValue: cookies.accessToken,
+    });
     if (foundToken) {
       res.sendStatus(401);
 

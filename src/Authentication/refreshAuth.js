@@ -5,7 +5,7 @@ const fs = require("fs");
 const privateKey = fs.readFileSync("private.pem");
 
 const RefreshToken = require("../Models/RefreshToken");
-// const BlackList = require("../Models/BlackList");
+const BlackList = require("../Models/BlackList");
 
 module.exports = async (req, res) => {
   // check for the refresh token in the cookies of the request (if not send back 401)

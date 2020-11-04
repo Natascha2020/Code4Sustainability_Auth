@@ -30,7 +30,7 @@ module.exports = async (req, res) => {
 
     if (decryptedLinkedJWT) {
       await RefreshToken.deleteOne({ _id: result._id });
-      await BlackList.create({ tokenValue: result.linkedJWT });
+      // await BlackList.create({ tokenValue: result.linkedJWT });
       res.setHeader("Set-Cookie", [
         cookie.serialize("accessToken", "", {
           httpOnly: true,

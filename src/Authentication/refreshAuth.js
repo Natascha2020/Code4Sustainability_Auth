@@ -3,9 +3,8 @@ const jwt = require("jsonwebtoken");
 const uuid4 = require("uuid4");
 const fs = require("fs");
 const privateKey = fs.readFileSync("private.pem");
-const path = require("path");
 
-const RefreshToken = require(path.join(__dirname, "../Models/RefreshToken"));
+const RefreshToken = require("../Models/RefreshToken");
 const BlackList = require("../Models/BlackList");
 
 module.exports = async (req, res) => {
@@ -16,14 +15,12 @@ module.exports = async (req, res) => {
     return;
   }
 
-  console.log(cookies.refreshToken);
 
   // check validity of the refresh token in database
   const result = await RefreshToken.findOne({
     tokenValue: cookies.refreshToken,
   });
 
-  console.log(result);
   if (!result) {
     res.sendStatus(401);
     return;

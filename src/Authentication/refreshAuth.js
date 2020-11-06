@@ -3,8 +3,9 @@ const jwt = require("jsonwebtoken");
 const uuid4 = require("uuid4");
 const fs = require("fs");
 const privateKey = fs.readFileSync("private.pem");
+const path = require("path);
 
-const RefreshToken = require("../Models/RefreshToken");
+const RefreshToken = require(path.join(__dirname, "../Models/RefreshToken"));
 const BlackList = require("../Models/BlackList");
 
 module.exports = async (req, res) => {

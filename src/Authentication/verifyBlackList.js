@@ -1,5 +1,5 @@
 const cookie = require("cookie");
-const BlackList = require("../Models/BlackList.js");
+const Blacklist = require("../Models/Blacklist.js");
 
 module.exports = async (req, res) => {
   // check if access token is send in cookies with request
@@ -10,7 +10,7 @@ module.exports = async (req, res) => {
   }
   // check the existence in the blacklist
   try {
-    const foundToken = await BlackList.findOne({
+    const foundToken = await Blacklist.findOne({
       tokenValue: cookies.accessToken,
     });
     //if it exists send 401

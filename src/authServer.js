@@ -1,15 +1,15 @@
 require("dotenv").config();
-require("./dbConfig");
+require("./dbConfig.js");
 
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 
-const generateAuth = require("./Authentication/generateAuth");
-const refreshAuth = require("./Authentication/refreshAuth");
+const generateAuth = require("./Authentication/generateAuth.js");
+const refreshAuth = require("./Authentication/refreshAuth.js");
 // const verifyBlackList = require("./Authentication/verifyBlackList");
-const checkValidity = require("./Authentication/checkValidity");
-const deleteAuth = require("./Authentication/deleteAuth");
+const checkValidity = require("./Authentication/checkValidity.js");
+const deleteAuth = require("./Authentication/deleteAuth.js");
 const app = express();
 const port = process.env.PORT || 5001;
 

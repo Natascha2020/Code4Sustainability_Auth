@@ -1,5 +1,5 @@
 const cookie = require("cookie");
-const BlackList = require("../Models/BlackList");
+const BlackList = require("../Models/BlackList.js");
 
 module.exports = async (req, res) => {
   // check if access token is send in cookies with request

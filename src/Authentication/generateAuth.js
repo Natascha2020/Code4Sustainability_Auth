@@ -5,8 +5,8 @@ const cookie = require("cookie");
 const fs = require("fs");
 const privateKey = fs.readFileSync("private.pem", "utf-8");
 
-const User = require("../Models/User");
-const RefreshToken = require("../Models/RefreshToken");
+const User = require("../Models/User.js");
+const RefreshToken = require("../Models/RefreshToken.js");
 
 module.exports = async (req, res) => {
   const { email, password } = req.body;

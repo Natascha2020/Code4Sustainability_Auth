@@ -4,8 +4,8 @@ const uuid4 = require("uuid4");
 const fs = require("fs");
 const privateKey = fs.readFileSync("private.pem");
 
-const RefreshToken = require("../Models/RefreshToken");
-const BlackList = require("../Models/BlackList");
+const RefreshToken = require("../Models/RefreshToken.js");
+const BlackList = require("../Models/BlackList.js");
 
 module.exports = async (req, res) => {
   // check for the refresh token in the cookies of the request (if not send back 401)
@@ -14,7 +14,6 @@ module.exports = async (req, res) => {
     res.sendStatus(401);
     return;
   }
-
 
   // check validity of the refresh token in database
   const result = await RefreshToken.findOne({

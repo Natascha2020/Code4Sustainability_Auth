@@ -2,8 +2,8 @@ const cookie = require("cookie");
 const jwt = require("jsonwebtoken");
 const fs = require("fs");
 const privateKey = fs.readFileSync("private.pem");
-const RefreshToken = require("../Models/RefreshToken");
-const BlackList = require("../Models/BlackList");
+const RefreshToken = require("../Models/RefreshToken.js");
+const BlackList = require("../Models/BlackList.js");
 
 module.exports = async (req, res) => {
   // check if access token is send in cookies with request

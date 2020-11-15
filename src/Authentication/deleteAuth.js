@@ -7,17 +7,21 @@ const Blacklist = require("../Models/Blacklist.js");
 
 module.exports = async (req, res) => {
   // check if access token is send in cookies with request
+
   const cookies = cookie.parse(req.headers.cookie || "");
+  console.log(cookies);
   if (!cookies.accessToken) {
     res.sendStatus(401);
     return;
   }
   // check the existence in the blacklist
+  console.log("test");
   try {
     // check validity of the refresh token in database
     const result = await RefreshToken.findOne({
       tokenValue: cookies.refreshToken,
     });
+    console.log("result", result);
 
     if (!result) {
       res.sendStatus(401);
@@ -29,8 +33,9 @@ module.exports = async (req, res) => {
     const decryptedLinkedJWT = jwt.verify(result.linkedJWT, "cat");
 
     if (decryptedLinkedJWT) {
+      console.log("in if statement", decryptedLinkedJWT);
       await RefreshToken.deleteOne({ _id: result._id });
-      await BlackList.create({ tokenValue: result.linkedJWT });
+      await Blacklist.create({ tokenValue: result.linkedJWT });
       res.setHeader("Set-Cookie", [
         cookie.serialize("accessToken", "", {
           httpOnly: true,
@@ -39,6 +44,7 @@ module.exports = async (req, res) => {
           httpOnly: true,
         }),
       ]);
+      console.log("res", res.headers);
       res.sendStatus(200);
     }
   } catch (err) {

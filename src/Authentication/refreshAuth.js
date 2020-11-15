@@ -14,7 +14,7 @@ module.exports = async (req, res) => {
     res.sendStatus(401);
     return;
   }
-
+  console.log("cookies refresh", cookies);
   // check validity of the refresh token in database
   const result = await RefreshToken.findOne({
     tokenValue: cookies.refreshToken,
@@ -25,6 +25,7 @@ module.exports = async (req, res) => {
     return;
   }
 
+  console.log("result", result);
   // check if the accessToken linked to the refreshToken in database is still valid (if send back 401 and delete refreshToken and put accessToken on blacklist)
 
   const newAccessToken = jwt.sign({ idUser: result.idUser }, "cat", {
@@ -36,6 +37,7 @@ module.exports = async (req, res) => {
     linkedJWT: newAccessToken,
     idUser: result.idUser,
   });
+  console.log("refresh", newRefreshToken);
   // Send back both new tokens to the client
   res.setHeader("Set-Cookie", [
     cookie.serialize("accessToken", String(newAccessToken), {

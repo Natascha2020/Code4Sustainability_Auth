@@ -1,6 +1,6 @@
 # Code4Sustainability_Auth
 
-#### Authentication server using OAuth 2.0
+##### ->Authentication server using OAuth 2.0
 
 ### Connecting developers with sustainable projects, initiatives and startUps.
 **"Join for the challenge, stay for the people!"**

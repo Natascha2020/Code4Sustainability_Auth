@@ -45,7 +45,7 @@
 | User.js                | Model for mongoDB database                  |
 | RefreshToken.js        | Model for mongoDB database                  |
 | Blacklist.js           | Model for mongoDB database                  |
-| checkValifity.js       | Controllers for users endpoints             |
+| checkValidity.js       | Controllers for users endpoints             |
 | deleteAuth.js          | Controller for Logout                       |
 | generateAuth.js        | Controllers for LogIn                       |
 | refreshAuth.js         | Controllers for refreshing tokens           |

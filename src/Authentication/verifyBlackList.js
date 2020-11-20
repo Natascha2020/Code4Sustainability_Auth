@@ -1,4 +1,4 @@
-const cookie = require("cookie");
+/* const cookie = require("cookie");
 const Blacklist = require("../Models/Blacklist.js");
 
 module.exports = async (req, res) => {
@@ -24,3 +24,4 @@ module.exports = async (req, res) => {
     console.log(err);
   }
 };
+ */

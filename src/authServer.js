@@ -7,7 +7,7 @@ const bodyParser = require("body-parser");
 
 const generateAuth = require("./Authentication/generateAuth.js");
 const refreshAuth = require("./Authentication/refreshAuth.js");
-const verifyBlacklist = require("./Authentication/verifyBlacklist");
+const verifyBlacklist = require("./Authentication/verifyBlacklist.js");
 const checkValidity = require("./Authentication/checkValidity.js");
 const deleteAuth = require("./Authentication/deleteAuth.js");
 const app = express();

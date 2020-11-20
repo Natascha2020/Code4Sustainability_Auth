@@ -15,13 +15,11 @@ module.exports = async (req, res) => {
     return;
   }
   // check the existence in the blacklist
-  console.log("test");
   try {
     // check validity of the refresh token in database
     const result = await RefreshToken.findOne({
       tokenValue: cookies.refreshToken,
     });
-    console.log("result", result);
 
     if (!result) {
       res.sendStatus(401);
@@ -44,7 +42,6 @@ module.exports = async (req, res) => {
           httpOnly: true,
         }),
       ]);
-      console.log("res", res.headers);
       res.sendStatus(200);
     }
   } catch (err) {

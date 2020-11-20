@@ -7,7 +7,7 @@ const bodyParser = require("body-parser");
 
 const generateAuth = require("./Authentication/generateAuth.js");
 const refreshAuth = require("./Authentication/refreshAuth.js");
-// const verifyBlackList = require("./Authentication/verifyBlackList");
+const verifyBlacklist = require("./Authentication/verifyBlacklist");
 const checkValidity = require("./Authentication/checkValidity.js");
 const deleteAuth = require("./Authentication/deleteAuth.js");
 const app = express();
@@ -16,7 +16,7 @@ const port = process.env.PORT || 5001;
 // Ensuring cors is working - TO ADD: Whitelist for ports
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "http://localhost:3000, https://c4s-app.herokuapp.com",
     methods: "GET, POST, PUT, DELETE, HEAD",
     allowHeaders: "Origin, X-Requested-With, Content-Type, Accept",
     exposedHeaders: "Content-Range,X-Content-Range",
@@ -33,7 +33,7 @@ app.use(bodyParser.json());
 app.post("/generateAuth", generateAuth);
 
 app.get("/refreshAuth", refreshAuth);
-// app.get("/verifyBlackList", verifyBlackList);
+app.get("/verifyBlacklist", verifyBlacklist);
 app.get("/checkValidity", checkValidity, refreshAuth);
 app.get("/deleteAuth", deleteAuth);
 

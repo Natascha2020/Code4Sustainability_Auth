@@ -44,6 +44,7 @@ module.exports = async (req, res) => {
       expirationDate: date,
     });
 
+    console.log(accessToken, refreshToken);
     // Send back both tokens to the client and save in coolies with httpOnly flag
     res.setHeader("Set-Cookie", [
       cookie.serialize("accessToken", String(accessToken), {

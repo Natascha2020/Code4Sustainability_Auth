@@ -49,11 +49,13 @@ module.exports = async (req, res) => {
       cookie.serialize("accessToken", String(accessToken), {
         httpOnly: true,
         SameSite: none,
+        secure,
         /* domain: c4s-app.herokuapp.com, */
       }),
       cookie.serialize("refreshToken", String(refreshToken), {
         httpOnly: true,
         SameSite: none,
+        secure,
         /* domain: c4s-app.herokuapp.com, */
       }),
     ]);

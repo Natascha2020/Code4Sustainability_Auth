@@ -59,7 +59,8 @@ module.exports = async (req, res) => {
       }),
     ]);
     res.cookie("accessToken", String(accessToken), {
-      maxAge: 86_400_000,
+      SameSite: "none",
+      secure: true,
       httpOnly: true,
     });
     /* res.send(accessToken); */

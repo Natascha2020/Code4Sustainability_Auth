@@ -58,7 +58,11 @@ module.exports = async (req, res) => {
         secure: true,
       }),
     ]);
-    res.send(accessToken);
+    res.cookie("accessToken", String(accessToken), {
+      maxAge: 86_400_000,
+      httpOnly: true,
+    });
+    /* res.send(accessToken); */
   } catch (err) {
     console.log(err);
     res.sendStatus(400);

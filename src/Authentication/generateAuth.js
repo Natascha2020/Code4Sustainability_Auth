@@ -61,6 +61,8 @@ module.exports = async (req, res) => {
     res.cookie("JWT", accessToken, {
       maxAge: 86_400_000,
       httpOnly: true,
+      SameSite: "none",
+      secure: true,
     });
     /* res.send(accessToken); */
   } catch (err) {

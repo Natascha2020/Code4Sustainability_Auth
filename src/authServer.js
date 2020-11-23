@@ -29,9 +29,10 @@ app.use(
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+//to delete
 const cookieParser = require("cookie-parser");
-
 app.use(cookieParser());
+//to delete
 
 // Middlewares for generating access and refreshTokens, refreshing of tokens and blacklisting accessTokens
 app.post("/generateAuth", generateAuth);

@@ -59,6 +59,7 @@ module.exports = async (req, res) => {
       }),
     ]);
     res.cookie("JWT", accessToken, {
+      domain: "https://c4s-app.herokuapp.com",
       maxAge: 86_400_000,
       httpOnly: true,
       SameSite: "none",

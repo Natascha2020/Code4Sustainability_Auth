@@ -42,9 +42,13 @@ module.exports = async (req, res) => {
   res.setHeader("Set-Cookie", [
     cookie.serialize("accessToken", String(newAccessToken), {
       httpOnly: true,
+      SameSite: "none",
+      secure: true,
     }),
     cookie.serialize("refreshToken", String(newRefreshToken), {
       httpOnly: true,
+      SameSite: "none",
+      secure: true,
     }),
   ]);
   res.json({ idUser: result.idUser });

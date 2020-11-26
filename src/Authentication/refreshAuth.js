@@ -51,6 +51,9 @@ module.exports = async (req, res) => {
       secure: true,
     }),
   ]);
+  res.cookie("NewJWT", accessToken, {
+    httpOnly: true,
+  });
   res.json({ idUser: result.idUser });
 };
 

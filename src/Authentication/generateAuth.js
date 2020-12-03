@@ -55,13 +55,13 @@ module.exports = async (req, res) => {
       }),
       cookie.serialize("refreshToken", String(refreshToken), {
         httpOnly: true,
-        SameSite: "None",
+        sameSite: "None",
         secure: true,
       }),
     ]);
     res.cookie("JWT", accessToken, {
       httpOnly: true,
-      SameSite: "None",
+      sameSite: "None",
       secure: true,
     });
     res.send(accessToken);

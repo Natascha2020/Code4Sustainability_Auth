@@ -62,15 +62,15 @@ module.exports = async (req, res) => {
       }),
     ]);
  */
-    /*   cookie.defaults = {
+    cookie.defaults = {
       sameSite: "None",
       httpOnly: true,
       secure: true,
       domain: ".c4s-app.herokuapp.com",
-    }; */
+    };
 
-    res.cookie("accessToken", String(accessToken), { httpOnly: true });
-    res.cookie("refreshToken", String(refreshToken), { httpOnly: true });
+    res.cookie("accessToken", String(accessToken), { httpOnly: true, sameSite: "none", secure: true });
+    res.cookie("refreshToken", String(refreshToken), { httpOnly: true, sameSite: "none", secure: true });
     res.sendStatus(200);
 
     /* res.send(accessToken); */

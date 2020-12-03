@@ -31,12 +31,12 @@ module.exports = async (req, res, next) => {
       let idUser = payload.idUser;
       //test
       res.setHeader("Set-Cookie", [
-        cookie.serialize("accessToken", String(accessToken), {
+        cookie.serialize("accessToken", String(cookies.accessToken), {
           httpOnly: true,
           sameSite: "None",
           secure: true,
         }),
-        cookie.serialize("refreshToken", String(refreshToken), {
+        cookie.serialize("refreshToken", String(cookies.refreshToken), {
           httpOnly: true,
           sameSite: "None",
           secure: true,

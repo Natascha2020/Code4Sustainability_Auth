@@ -47,7 +47,7 @@ module.exports = async (req, res) => {
 
     console.log(accessToken, refreshToken);
     // Send back both tokens to the client and save in coolies with httpOnly flag
-    res.setHeader("Set-Cookie", [
+    /* res.setHeader("Set-Cookie", [
       cookie.serialize("accessToken", String(accessToken), {
         httpOnly: true,
         sameSite: "None",
@@ -61,15 +61,19 @@ module.exports = async (req, res) => {
         path: "/",
       }),
     ]);
-
-    cookie.defaults = {
+ */
+    /*   cookie.defaults = {
       sameSite: "None",
       httpOnly: true,
       secure: true,
       domain: ".c4s-app.herokuapp.com",
-    };
+    }; */
 
-    res.send(accessToken);
+    res.cookie("accessToken", String(accessToken), { httpOnly: true });
+    res.cookie("refreshToken", String(refreshToken), { httpOnly: true });
+    res.sendStatus(200);
+
+    /* res.send(accessToken); */
   } catch (err) {
     console.log(err);
     res.sendStatus(400);

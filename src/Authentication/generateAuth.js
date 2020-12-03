@@ -65,6 +65,7 @@ module.exports = async (req, res) => {
       httpOnly: true,
       secure: true,
       domain: ".c4s-app.herokuapp.com",
+      path: "/",
     };
 
     res.send(accessToken);

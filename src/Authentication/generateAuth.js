@@ -28,8 +28,8 @@ module.exports = async (req, res) => {
 
     // Generate access token - JWT
     const accessToken = jwt.sign({ idUser: result._id }, "cat", {
-      /* expiresIn: 60 * 60 * 3600, */
-      expiresIn: 5,
+      expiresIn: 60 * 60 * 3600,
+      /* expiresIn: 5, */
     });
 
     // Generate refresh token - UUID4

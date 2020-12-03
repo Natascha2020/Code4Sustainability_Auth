@@ -60,11 +60,11 @@ module.exports = async (req, res) => {
       }),
     ]);
 
-    res.cookie("JWT", accessToken, {
+    /* res.cookie("JWT", accessToken, {
       httpOnly: true,
       sameSite: "None",
       secure: true,
-    });
+    }); */
 
     cookie.defaults = {
       sameSite: "None",

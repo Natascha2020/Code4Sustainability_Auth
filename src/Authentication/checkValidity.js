@@ -29,6 +29,27 @@ module.exports = async (req, res, next) => {
     if (payload) {
       req.user = payload.idUser;
       let idUser = payload.idUser;
+      //test
+      res.setHeader("Set-Cookie", [
+        cookie.serialize("accessToken", String(accessToken), {
+          httpOnly: true,
+          sameSite: "None",
+          secure: true,
+        }),
+        cookie.serialize("refreshToken", String(refreshToken), {
+          httpOnly: true,
+          sameSite: "None",
+          secure: true,
+        }),
+      ]);
+
+      cookie.defaults = {
+        sameSite: "None",
+        httpOnly: true,
+        secure: true,
+        domain: ".c4s-app.herokuapp.com",
+      };
+      //test
       res.json({ valid: true, idUser: idUser });
       return;
     }

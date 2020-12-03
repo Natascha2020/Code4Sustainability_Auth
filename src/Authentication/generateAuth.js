@@ -60,17 +60,18 @@ module.exports = async (req, res) => {
       }),
     ]);
 
+    res.cookie("JWT", accessToken, {
+      httpOnly: true,
+      sameSite: "None",
+      secure: true,
+    });
+
     cookie.defaults = {
       sameSite: "None",
       httpOnly: true,
       secure: true,
     };
 
-    res.cookie("JWT", accessToken, {
-      httpOnly: true,
-      sameSite: "strict",
-      secure: true,
-    });
     res.send(accessToken);
   } catch (err) {
     console.log(err);

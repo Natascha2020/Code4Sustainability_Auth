@@ -27,7 +27,7 @@ module.exports = async (req, res) => {
 
   // check if the accessToken linked to the refreshToken in database is still valid (if send back 401 and delete refreshToken and put accessToken on blacklist)
 
-  const newAccessToken = jwt.sign({ idUser: result.idUser }, "cat", {
+  const newAccessToken = jwt.sign({ idUser: result.idUser }, process.env.SEC, {
     expiresIn: 5,
   });
   const newRefreshToken = uuid4();

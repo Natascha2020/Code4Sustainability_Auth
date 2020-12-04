@@ -27,7 +27,7 @@ module.exports = async (req, res) => {
     }
 
     // Generate access token - JWT
-    const accessToken = jwt.sign({ idUser: result._id }, "cat", {
+    const accessToken = jwt.sign({ idUser: result._id }, process.env.SEC, {
       expiresIn: 60 * 60 * 3600,
       /* expiresIn: 5, */
     });

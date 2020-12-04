@@ -24,7 +24,7 @@ module.exports = async (req, res, next) => {
       return;
     }
 
-    const payload = jwt.verify(cookies.accessToken, "cat");
+    const payload = jwt.verify(cookies.accessToken, process.env.SEC);
     // if valid go next
     if (payload) {
       req.user = payload.idUser;

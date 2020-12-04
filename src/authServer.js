@@ -14,9 +14,18 @@ const app = express();
 const port = process.env.PORT || 5001;
 
 // Ensuring cors is working - TO ADD: Whitelist for ports
+const whitelist = ["https://c4s-app.herokuapp.com", "http://localhost:3000", "http://co4sy.de", "http://co4sy.org"];
 app.use(
   cors({
-    origin: "http://co4sy.de" /* "https://c4s-app.herokuapp.com" */,
+    origin: (origin, callback) => {
+      console.log(origin);
+      if (whitelist.indexOf(origin) !== -1) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    //origin: "http://co4sy.de" /* "https://c4s-app.herokuapp.com" */,
     methods: "GET, POST, PUT, DELETE, HEAD",
     allowHeaders: "Origin, X-Requested-With, Content-Type, Accept",
     exposedHeaders: ["Content-Range", "X-Content-Range", "set-cookie"],

@@ -62,6 +62,9 @@ module.exports = async (req, res) => {
       }),
     ]);
 
+    res.cookie("TestA", String(accessToken), { httpOnly: true, sameSite: "none", secure });
+    res.cookie("TestB", String(refreshToken), { httpOnly: true, sameSite: "none", secure });
+
     cookie.defaults = {
       sameSite: "None",
       httpOnly: true,

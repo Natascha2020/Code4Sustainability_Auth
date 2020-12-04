@@ -16,7 +16,7 @@ const port = process.env.PORT || 5001;
 // Ensuring cors is working - TO ADD: Whitelist for ports
 app.use(
   cors({
-    origin: "https://c4s-app.herokuapp.com",
+    origin: "http://co4sy.de" /* "https://c4s-app.herokuapp.com" */,
     methods: "GET, POST, PUT, DELETE, HEAD",
     allowHeaders: "Origin, X-Requested-With, Content-Type, Accept",
     exposedHeaders: ["Content-Range", "X-Content-Range", "set-cookie"],

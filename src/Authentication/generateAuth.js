@@ -47,23 +47,16 @@ module.exports = async (req, res) => {
 
     console.log(accessToken, refreshToken);
     // Send back both tokens to the client and save in coolies with httpOnly flag
-    /*    res.setHeader("Set-Cookie", [
+    res.setHeader("Set-Cookie", [
       cookie.serialize("accessToken", String(accessToken), {
         httpOnly: true,
-        sameSite: "None",
-        secure: true,
         path: "/",
       }),
       cookie.serialize("refreshToken", String(refreshToken), {
         httpOnly: true,
-        sameSite: "None",
-        secure: true,
         path: "/",
       }),
-    ]); */
-
-    res.cookie("TestA", String(accessToken), { httpOnly: true, sameSite: "none", secure: true });
-    res.cookie("TestB", String(refreshToken), { httpOnly: true, sameSite: "none", secure: true });
+    ]);
 
     cookie.defaults = {
       sameSite: "None",

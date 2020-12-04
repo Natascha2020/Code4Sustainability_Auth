@@ -26,8 +26,8 @@ app.use(
       }
     },
     //origin: "http://co4sy.de" /* "https://c4s-app.herokuapp.com" */,
-    methods: "GET, POST, PUT, DELETE, HEAD",
-    allowHeaders: "Origin, X-Requested-With, Content-Type, Accept",
+    methods: "GET, POST, PUT, DELETE, HEAD, OPTIONS",
+    allowHeaders: "Origin, X-Requested-With, Content-Type, Accept, Authorization",
     exposedHeaders: ["Content-Range", "X-Content-Range", "set-cookie"],
     preflightContinue: true,
     credentials: true,

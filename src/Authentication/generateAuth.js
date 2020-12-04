@@ -50,10 +50,14 @@ module.exports = async (req, res) => {
     res.setHeader("Set-Cookie", [
       cookie.serialize("accessToken", String(accessToken), {
         httpOnly: true,
+        sameSite: "None",
+        secure: true,
         path: "/",
       }),
       cookie.serialize("refreshToken", String(refreshToken), {
         httpOnly: true,
+        sameSite: "None",
+        secure: true,
         path: "/",
       }),
     ]);
